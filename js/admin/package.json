@@ -1,7 +1,7 @@
 {
   "name": "@flarum/flarum-ext-sticky-admin",
   "devDependencies": {
-    "flarum-webpack-config": "0.1.0-beta.5"
+    "flarum-webpack-config": "^0.1.0-beta.6"
   },
   "scripts": {
     "watch": "node_modules/webpack/bin/webpack.js --mode development --watch",
