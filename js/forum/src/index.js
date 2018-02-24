@@ -17,3 +17,4 @@ app.initializers.add('flarum-sticky', () => {
   addStickyControl();
   addStickyExcerpt();
 });
+
