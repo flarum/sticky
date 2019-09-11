@@ -61,17 +61,6 @@ class PinStickiedDiscussionsToTop
                 return;
             }
 
-            // Otherwise, if we are viewing "all discussions", only pin stickied
-            // discussions to the top if they are unread. To do this in a
-            // performant way we create another query which will select all
-            // stickied discussions, marry them into the main query, and then
-            // reorder the unread ones up to the top.
-            $sticky = clone $query;
-            $sticky->where('is_sticky', true);
-            $sticky->orders = null;
-
-            $query->union($sticky);
-
             $read = $query->newQuery()
                 ->selectRaw(1)
                 ->from('discussion_user as sticky')
@@ -85,12 +74,8 @@ class PinStickiedDiscussionsToTop
             $query->orderByRaw('is_sticky and not exists ('.$read->toSql().') and last_posted_at > ? desc')
                 ->addBinding(array_merge($read->getBindings(), [$search->getActor()->read_time ?: 0]), 'union');
 
-            $query->unionOrders = array_merge($query->unionOrders, $query->orders);
-            $query->unionLimit = $query->limit;
-            $query->unionOffset = $query->offset;
-
-            $query->limit = $sticky->limit = $query->offset + $query->limit;
-            $query->offset = $sticky->offset = null;
+            $query->limit = $query->offset + $query->limit;
+            $query->offset = null;
         }
     }
 }
