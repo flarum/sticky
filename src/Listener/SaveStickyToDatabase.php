@@ -34,7 +34,7 @@ class SaveStickyToDatabase
             $discussion = $event->discussion;
             $actor = $event->actor;
 
-            $actor->can('sticky', $discussion);
+            $actor->assertCan('sticky', $discussion);
 
             if ((bool) $discussion->is_sticky === $isSticky) {
                 return;
