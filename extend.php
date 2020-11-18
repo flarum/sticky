@@ -7,6 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Extend;
 use Flarum\Sticky\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -15,6 +16,13 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less'),
+
+    (new Extend\ApiSerializer(DiscussionSerializer::class))
+        ->attribute('isSticky', function (array $attributes, $discussion) {
+            return (bool) $discussion->is_sticky;
+        })->attribute('canSticky', function (array $attributes, $discussion, DiscussionSerializer $serializer) {
+            return (bool) $serializer->getActor()->can('sticky', $discussion);
+        }),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js'),
