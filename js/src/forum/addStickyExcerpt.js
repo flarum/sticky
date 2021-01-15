@@ -17,6 +17,7 @@ export default function addStickyControl() {
       if (firstPost) {
         const excerpt = truncate(firstPost.contentPlain(), 175);
 
+        // Wrapping in <div> because ItemList entries need to be vnodes
         items.add('excerpt', <div>{excerpt}</div>, -100);
       }
     }
