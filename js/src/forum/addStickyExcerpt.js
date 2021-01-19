@@ -11,7 +11,7 @@ export default function addStickyControl() {
   extend(DiscussionListItem.prototype, 'infoItems', function(items) {
     const discussion = this.attrs.discussion;
 
-    if (discussion.isSticky() && !this.attrs.params.q && !discussion.lastReadPostNumber()) {
+    if (discussion.isSticky() && !this.attrs.params.q && discussion.lastReadPostNumber() < discussion.lastPostNumber()) {
       const firstPost = discussion.firstPost();
 
       if (firstPost) {
