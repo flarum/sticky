@@ -35,8 +35,8 @@ class CreatePostWhenDiscussionIsStickied
 
     /**
      * @param Discussion $discussion
-     * @param User $user
-     * @param bool $isSticky
+     * @param User       $user
+     * @param bool       $isSticky
      */
     protected static function stickyChanged(Discussion $discussion, User $user, $isSticky)
     {

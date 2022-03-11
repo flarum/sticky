@@ -49,14 +49,15 @@ class DiscussionStickiedPost extends AbstractEventPost implements MergeableInter
     /**
      * Create a new instance in reply to a discussion.
      *
-     * @param int $discussionId
-     * @param int $userId
+     * @param int  $discussionId
+     * @param int  $userId
      * @param bool $isSticky
+     *
      * @return static
      */
     public static function reply($discussionId, $userId, $isSticky)
     {
-        $post = new static;
+        $post = new static();
 
         $post->content = static::buildContent($isSticky);
         $post->created_at = time();
@@ -70,6 +71,7 @@ class DiscussionStickiedPost extends AbstractEventPost implements MergeableInter
      * Build the content attribute.
      *
      * @param bool $isSticky Whether or not the discussion is stickied.
+     *
      * @return array
      */
     public static function buildContent($isSticky)

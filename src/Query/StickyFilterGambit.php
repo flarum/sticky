@@ -39,6 +39,6 @@ class StickyFilterGambit extends AbstractRegexGambit implements FilterInterface
 
     protected function constrain(Builder $query, bool $negate)
     {
-        $query->where('is_sticky', ! $negate);
+        $query->where('is_sticky', !$negate);
     }
 }

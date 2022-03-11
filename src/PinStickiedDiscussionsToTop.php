@@ -26,7 +26,7 @@ class PinStickiedDiscussionsToTop
 
             if ($count = count($filters)) {
                 if ($count === 1 && $filters[0] instanceof TagFilterGambit) {
-                    if (! is_array($query->orders)) {
+                    if (!is_array($query->orders)) {
                         $query->orders = [];
                     }
 
